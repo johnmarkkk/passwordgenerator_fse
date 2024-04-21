@@ -11,9 +11,36 @@ const characters = [
 
 let passwordLenght = 12;
 let generatePassword = "";
+let history = [];
 
 const button = document.querySelector("button");
 const input = document.querySelector("input");
+
+const paragraph = document.querySelector(".password");
+const content = document.querySelector(".history .content")
+const i = document.querySelector("i");
+
+paragraph.addEventListener('click', () => {
+    if(history.length !== 0){
+        paragraph.innerHTML = "";
+        content.style.display = 'block';
+        history.forEach( i => {
+            if(!content.innerText.includes(i) ){
+                let p = document.createElement("p");
+                p.innerText = i;
+                content.append(p);
+            }
+        })
+    }
+
+    i.addEventListener('click', () => {
+        paragraph.innerHTML = "password generated history";
+        content.style.display = 'none';
+    } )
+})
+
+
+
 
 button.addEventListener('click', generate);
 
@@ -22,9 +49,19 @@ function generate(){
     for(let i = 0; i<passwordLenght; i++){
         generatePassword = generatePassword + characters[Math.floor(Math.random()*characters.length)];
     };
-    
     input.value = generatePassword;
+    history.push(generatePassword);
+
+    history.forEach( i => {
+        if(!content.innerText.includes(i) ){
+            let p = document.createElement("p");
+            p.innerText = i;
+            content.append(p);
+        }
+    })
 }
+
+
 
 
 
