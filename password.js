@@ -17,10 +17,20 @@ const button = document.querySelector("button");
 const input = document.querySelector("input");
 
 const paragraph = document.querySelector(".password");
-const content = document.querySelector(".history .content")
-const i = document.querySelector("i");
 
+const content = document.querySelector(".history .content");
+const i = document.querySelector("i");
+const clear = document.querySelector(".history .clear");
+
+clear.addEventListener('click', () => {
+    const paragraphAll = content.querySelectorAll("p");
+    for(let i = 0; i < paragraphAll.length; i++){
+        paragraphAll[i].remove();
+    }
+    history = [];
+});
 paragraph.addEventListener('click', () => {
+
     if(history.length !== 0){
         paragraph.innerHTML = "";
         content.style.display = 'block';
@@ -32,14 +42,12 @@ paragraph.addEventListener('click', () => {
             }
         })
     }
-
     i.addEventListener('click', () => {
         paragraph.innerHTML = "password generated history";
         content.style.display = 'none';
     } )
+
 })
-
-
 
 
 button.addEventListener('click', generate);
